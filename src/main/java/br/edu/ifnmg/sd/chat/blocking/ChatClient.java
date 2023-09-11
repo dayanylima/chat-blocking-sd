@@ -11,8 +11,9 @@ import java.util.Scanner;
 public class ChatClient implements Runnable {
 
     
-    //endereço IP do servidor
+    //Endereço IP para conectar ao servidor
     private static final String SERVER_ADDRESS = "127.0.0.1";
+    //Objeto para armazenar o socket do cliente
     private ClientSocket clientSocket;
     private Scanner sc;
 
@@ -35,7 +36,7 @@ public class ChatClient implements Runnable {
         }
     }
 
-    //Essa thread fica recebendo mensagens do servidor, que foram enviados por outros clientes
+    //Fica recebendo mensagens do servidor, que foram enviados por outros clientes
     @Override
     public void run() {
 

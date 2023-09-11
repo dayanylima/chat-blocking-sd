@@ -10,18 +10,19 @@ import java.util.List;
  *
  * @author dayan
  */
+//Aplicação servidora
 public class ChatServer {
 
-    //porta utilizada pelo servidor
+    //Porta utilizada pelo servidor
     public static final int PORT = 4000;
     private ServerSocket serverSocket;
     //Lista de clientes do servidor
     private final List<ClientSocket> clients = new LinkedList<>();
 
-    //Função que inicia o servidor
+    //Inicia o servidor, criando socket para o servidor
     public void start() throws IOException {
 
-        //Instancio meu objeto serverSocket, informando a porta que vai utilizada para o servidor
+        //Instancio meu objeto serverSocket, informando a porta que vai utilizada
         serverSocket = new ServerSocket(PORT);
         System.out.println("Servidor iniciado na porta " + PORT);
         clientConnectionLoop();
@@ -70,10 +71,9 @@ public class ChatServer {
             //Evita que o servidor mande a mensagem de volta para o seu próprio remetente
             if (!sender.equals(clientSocket)) {
                 //Se não foi possível enviar mensagem, remove elemento atual.
-                //Então se conexão de cliente cair ou o cliente sair da aplicação
+                //Ou então se conexão de cliente cair ou o cliente sair da aplicação
                 //o servidor não vai mandar mensagem para ele.
                 if (!clientSocket.sendMensagem("cliente " + sender.getRemotoSocketAddress() + ": " + mensagem)) {
-                    //antes de enviar modifico a mensagem informando quem enviou
                     iterator.remove();
                 }
             }
@@ -82,7 +82,7 @@ public class ChatServer {
     }
 
     public static void main(String[] args) {
-        //Instacio o ChatServer e de fato iniciar o servidor, caso a porta esteja ocupada ou servidor
+        //Instacio o server e de fato inicio o servidor, caso a porta esteja ocupada ou servidor
         //não for possível iniciar, é exibibida mensagem de erro.
         try {
             ChatServer server = new ChatServer();

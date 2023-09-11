@@ -10,16 +10,20 @@ import java.io.*;
  */
 
 //Classe para armazenar o socket do cliente
+//O servidor e o cliente utilizam esta classe
 public class ClientSocket {
 
+    //Representar conexão de um cliente com o servidor.
     private final Socket socket;
+    //Leitura
     private final BufferedReader in;
+    //Saída
     private final PrintWriter out;
 
     public ClientSocket(Socket socket) throws IOException {
         this.socket = socket;
         System.out.println("Cliente " + socket.getRemoteSocketAddress() + " conectou");
-        //Instacio objetos para receber e enviar mensagens dos clientes
+        //Instacio objetos para ler e enviar mensagens dos clientes
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.out = new PrintWriter(socket.getOutputStream(), true);
     }
@@ -29,7 +33,7 @@ public class ClientSocket {
         return socket.getRemoteSocketAddress();
     }
 
-    //Fechar o socket e os objetos de entrada e saída, para liberar os recursos utilizados
+    //Fecha a conexão do socket e os objetos usados para enviar e receber mensagens.
     public void close() {
         try {
             in.close();
@@ -41,7 +45,7 @@ public class ClientSocket {
 
     }
 
-    //Método que faz a leitura da mensagem
+    //Método para obter mensagem de respota
     public String getMessage() {
         try {
             return in.readLine();
